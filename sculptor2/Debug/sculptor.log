@@ -1,0 +1,19 @@
+﻿  CutBox.cpp
+  CutEllipsoid.cpp
+  CutSphere.cpp
+  CutVoxel.cpp
+  FiguraGeometrica.cpp
+  main.cpp
+C:\Users\Reyne\Desktop\Sculptor2\sculptor2\main.cpp(23): warning C4101: 'tempRdY': variável local não referenciada
+C:\Users\Reyne\Desktop\Sculptor2\sculptor2\main.cpp(23): warning C4101: 'tempRdZ': variável local não referenciada
+C:\Users\Reyne\Desktop\Sculptor2\sculptor2\main.cpp(22): warning C4101: 'tempZ1': variável local não referenciada
+C:\Users\Reyne\Desktop\Sculptor2\sculptor2\main.cpp(23): warning C4101: 'tempRdX': variável local não referenciada
+C:\Users\Reyne\Desktop\Sculptor2\sculptor2\main.cpp(22): warning C4101: 'tempY1': variável local não referenciada
+C:\Users\Reyne\Desktop\Sculptor2\sculptor2\main.cpp(22): warning C4101: 'tempX1': variável local não referenciada
+  PutBox.cpp
+  PutEllipsoid.cpp
+  PutSphere.cpp
+  PutVoxel.cpp
+  VoxelClass.cpp
+  Gerando Código...
+  sculptor.vcxproj -> C:\Users\Reyne\Desktop\Sculptor2\sculptor2\Debug\sculptor.exe
