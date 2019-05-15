@@ -9,7 +9,7 @@ m_r(r), m_g(g), m_b(b), m_a(a)
 
 void PutVoxel::draw(Sculptor& t) {
 	t.setColor(m_r, m_g, m_b, m_a);
-	t.putVoxel(m_x, m_y, m_z);
+	t.putVoxel(m_z, m_y, m_x);
 
 }
 
