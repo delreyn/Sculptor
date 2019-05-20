@@ -1,5 +1,16 @@
 #pragma once
 #include "FiguraGeometrica.h"
+
+/**
+* @file CutEllipsoid.h
+* @brief this header file will contain all required
+* definitions and basic utilities functions for cut an Ellipsoid in the sculpture.
+*
+* @author Reyne Jasson
+*
+* @date 19/05/2019
+*/
+
 class CutEllipsoid :
 	public FiguraGeometrica
 {

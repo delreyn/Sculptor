@@ -1,5 +1,16 @@
 #pragma once
 #include "FiguraGeometrica.h"
+
+/**
+* @file CutBox.h
+* @brief this header file will contain all required
+*functions as well as their usage information to Cut a Box in the Sculpt.
+*
+* @author Reyne Jasson
+*
+* @date 19/05/2019
+*/
+
 class CutBox :
 	public FiguraGeometrica
 {

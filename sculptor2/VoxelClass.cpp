@@ -19,7 +19,7 @@
 
 //##########################----Functions for validation----############################
 
-bool validVoxel(int x, int y, int z, int nx, int ny, int nz) {
+bool Sculptor::validVoxel(int x, int y, int z) {
 	if (x < nx && x >= 0) {
 		if (y < ny && y >= 0) {
 			if (z < nz && z >= 0) {
@@ -30,7 +30,7 @@ bool validVoxel(int x, int y, int z, int nx, int ny, int nz) {
 	return false;
 }
 
-void validRange(int &x0, int &y0, int &z0, int &x, int &y, int &z,int nx,int ny,int nz) {
+void Sculptor::validRange(int &x0, int &y0, int &z0, int &x, int &y, int &z) {
 
 	//Make sure the coordinates are within the Voxel space
 	if (x < 0) x = 0;
@@ -166,7 +166,7 @@ void Sculptor::setColor(float r, float g, float b, float alpha) {
 */
 void Sculptor::putVoxel(int z, int y, int x) {
 
-	if (!validVoxel(x, y, z,nx,ny,nz)) { std::cerr << "Invalid Voxel Location! \n"; return; }
+	if (!validVoxel(x, y, z)) { /*std::cerr << "Invalid Voxel Location! \n";*/ return; }
 
 	v[z][y][x].isOn = true;
 	v[z][y][x].r = r;
@@ -185,8 +185,8 @@ void Sculptor::putVoxel(int z, int y, int x) {
 * @date 01/05/2019
 */
 void Sculptor::cutVoxel(int z, int y, int x) {
-	if (!validVoxel(x,y,z,nx,ny,nz)){ 
-		std::cerr << "Invalid Voxel Location! \n";
+	if (!validVoxel(x,y,z)){ 
+		//std::cerr << "Invalid Voxel Location! \n";
 		return;
 	}
 
@@ -209,7 +209,7 @@ void Sculptor::cutVoxel(int z, int y, int x) {
 */
 void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1) {
 	
-	validRange(x0, y0, z0, x1, y1, z1,nx,ny,nz);
+	//validRange(x0, y0, z0, x1, y1, z1);
 
 	int i, j, k;
 	for (i = z0; i < z1; i++) {
@@ -240,7 +240,7 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1) {
 */
 void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1) {
 
-	validRange(x0, y0, z0, x1, y1, z1,nx,ny,nz);
+	//validRange(x0, y0, z0, x1, y1, z1,nx,ny,nz);
 
 	int i, j, k;
 	for (i = z0; i < z1; i++) {
@@ -502,20 +502,20 @@ void Sculptor::writeOFF(std::string filename){
 				if (v[i][j][k].isOn) 
 					countVox++;
 
-	ofile << 8 * countVox << " " << 6 * countVox << " 0 ";
+	ofile << 8 * countVox << " " << 6 * countVox << " 0\n";
 
 	for (int k = 0; k < nz; k++) {
 		for (int j = 0; j < ny; j++) {
 			for (int i = 0; i < nx; i++) {
 				if (v[k][j][i].isOn) {
-				  ofile << i - 0.5 << " " << j + 0.5 << " " << k - 0.5 << " "
-						<< i - 0.5 << " " << j - 0.5 << " " << k - 0.5 << " "
-						<< i + 0.5 << " " << j - 0.5 << " " << k - 0.5 << " "
-						<< i + 0.5 << " " << j + 0.5 << " " << k - 0.5 << " "
-						<< i - 0.5 << " " << j + 0.5 << " " << k + 0.5 << " "
-						<< i - 0.5 << " " << j - 0.5 << " " << k + 0.5 << " "
-						<< i + 0.5 << " " << j - 0.5 << " " << k + 0.5 << " "
-						<< i + 0.5 << " " << j + 0.5 << " " << k + 0.5 << " ";
+				  ofile << i - 0.5 << " " << j + 0.5 << " " << k - 0.5 << "\n"
+						<< i - 0.5 << " " << j - 0.5 << " " << k - 0.5 << "\n"
+						<< i + 0.5 << " " << j - 0.5 << " " << k - 0.5 << "\n"
+						<< i + 0.5 << " " << j + 0.5 << " " << k - 0.5 << "\n"
+						<< i - 0.5 << " " << j + 0.5 << " " << k + 0.5 << "\n"
+						<< i - 0.5 << " " << j - 0.5 << " " << k + 0.5 << "\n"
+						<< i + 0.5 << " " << j - 0.5 << " " << k + 0.5 << "\n"
+						<< i + 0.5 << " " << j + 0.5 << " " << k + 0.5 << "\n";
 				}
 			}
 		}
@@ -526,12 +526,12 @@ void Sculptor::writeOFF(std::string filename){
 			for (int k = 0; k < nx; k++) {
 				if (v[i][j][k].isOn) {
 					face = 8 * nfacs;
-					ofile << "4 " << face + 0 << " " << face + 3 << " " << face + 2 << " " << face + 1 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " "
-						<< "4 " << face + 4 << " " << face + 5 << " " << face + 6 << " " << face + 7 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " "
-						<< "4 " << face + 0 << " " << face + 1 << " " << face + 5 << " " << face + 4 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " "
-						<< "4 " << face + 0 << " " << face + 4 << " " << face + 7 << " " << face + 3 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " "
-						<< "4 " << face + 3 << " " << face + 7 << " " << face + 6 << " " << face + 2 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " "
-						<< "4 " << face + 1 << " " << face + 2 << " " << face + 6 << " " << face + 5 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << " ";
+					ofile << "4 " << face + 0 << " " << face + 3 << " " << face + 2 << " " << face + 1 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << "\n"
+						<< "4 " << face + 4 << " " << face + 5 << " " << face + 6 << " " << face + 7 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << "\n"
+						<< "4 " << face + 0 << " " << face + 1 << " " << face + 5 << " " << face + 4 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << "\n"
+						<< "4 " << face + 0 << " " << face + 4 << " " << face + 7 << " " << face + 3 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << "\n"
+						<< "4 " << face + 3 << " " << face + 7 << " " << face + 6 << " " << face + 2 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << "\n"
+						<< "4 " << face + 1 << " " << face + 2 << " " << face + 6 << " " << face + 5 << " " << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b << " " << v[i][j][k].a << "\n";
 					nfacs++;
 				}
 			}
@@ -616,7 +616,7 @@ void Sculptor::writeVECT(std::string filename) {
 			
 	//In this aplications is assumed polign is one pixel
 	ofile << "VECT ";
-	ofile << countVox<<" "<< countVox<<" "<< countVox << " ";
+	ofile << countVox<<" "<< countVox<<" "<< countVox << "\n";
 	
 	//wrinting voxels and colors
 	for (int i = 0; i < countVox; i++) {
@@ -633,14 +633,14 @@ void Sculptor::writeVECT(std::string filename) {
 	for (int i = 0; i < nz; i++)
 		for (int j = 0; j < ny; j++)
 			for (int k = 0; k < nx; k++)
-				if (v[i][j][k].isOn) ofile << i << " " << j << " " << k << " ";
+				if (v[i][j][k].isOn) ofile << i << " " << j << " " << k << "\n";
 	
 	//Writing Colors(RGB) codes and transparency alpha
 	for (int i = 0; i < nz; i++)
 		for (int j = 0; j < ny; j++)
 			for (int k = 0; k < nx; k++)
 				if (v[i][j][k].isOn) 
-					ofile << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b <<" "<< v[i][j][k].a << " ";
+					ofile << v[i][j][k].r << " " << v[i][j][k].g << " " << v[i][j][k].b <<" "<< v[i][j][k].a << "\n";
 
 	ofile.close(); 
 	std::cout << "VECT file sucessfully created! \n";

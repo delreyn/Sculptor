@@ -1,5 +1,15 @@
 #pragma once
 #include "FiguraGeometrica.h"
+
+/**
+* @file CutSphere.h
+* @brief this header file will contain all required
+* definitions and basic utilities functions for cutan Sphere shaped object in the sculpture.
+*
+* @author Reyne Jasson
+*
+* @date 19/05/2019
+*/
 class CutSphere :
 	public FiguraGeometrica
 {

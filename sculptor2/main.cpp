@@ -30,7 +30,7 @@ int main()
 
 	ifile >> part1 >> nx >> ny >> nz;
 	Sculptor S(nx, ny, nz);
-	cout << "Sulpture size: " << nx << "x" << ny << "x" << nz << "\n\n";
+	cout << "Sculpture size: " << nx << "x" << ny << "x" << nz << "\n\n";
 
 	//reading the file while the end is not reached 
 	while (ifile >> part1) {
@@ -94,7 +94,7 @@ int main()
 			//cout << part1 << " " << x << " " << y << " " << z << " " << rdx << " " << rdy << " " << rdz << "\n";
 		}
 		else {
-			cout << "Invalid/corrupted file. exiting...\n";
+			std::cerr << "Invalid/corrupted file. exiting...\n";
 			std::exit(1);
 		}
 	}
@@ -105,5 +105,7 @@ int main()
 		delete fig;
 	}
 
-	S.writeOFF("C:/Users/Reyne/Desktop/off.txt");
+	S.writeOFF("C:/Users/Reyne/Desktop/off.off");
+	S.writeVECT("C:/Users/Reyne/Desktop/vect.vect");
+
 }

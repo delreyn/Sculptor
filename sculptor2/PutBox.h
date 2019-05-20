@@ -1,5 +1,16 @@
 #pragma once
 #include "FiguraGeometrica.h"
+
+/**
+* @file PutBox.h
+* @brief this header file will contain all required
+* definitions and basic utilities functions to draw a box in the Sculpture.
+*
+* @author Reyne Jasson
+*
+* @date 19/05/2019
+*/
+
 class PutBox :
 	public FiguraGeometrica
 {
